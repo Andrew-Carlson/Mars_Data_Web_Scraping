@@ -2,7 +2,7 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_pymongo import PyMongo
 import scraping 
-# The first line says that we'll use Flask to render a template, redirecting to another url, and creating a URL.
+# The first line says that we'll use Flask web framework to render a template, redirecting to another url, and creating a URL.
 # The second line says we'll use PyMongo to interact with our Mongo database.
 # The third line says that to use the scraping code, we will convert from Jupyter notebook to Python.
 
@@ -17,6 +17,7 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app" # URI: uniform re
 # At the software level, within an operating system, 
 # a port is a logical construct that identifies a specific process or a type of network service.
 
+# create variable for PyMongo function
 mongo = PyMongo(app)
 
 # define the route for the html page:
@@ -57,7 +58,9 @@ def scrape():
 
     # tell flask to run
 
-    if __name == "__main__":
+if __name == "__main__":
 
-        app.run()
+    app.run()
         
+# at this point, scraping code had been created and two flask routes have been made
+# scraping code will be integrated in a way that Flask can understand from scraping.py
