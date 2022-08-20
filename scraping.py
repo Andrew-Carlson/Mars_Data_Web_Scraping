@@ -3,16 +3,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup as soup
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
-
-# Set up and create an instance of splinter (prep automated browser and specify that it is chrome)
-executable_path = {'executable_path': ChromeDriverManager().install()}
-
-# **executable_path is unpacking the dictionary we've stored the path in
-# headless=False means that all of the browser's actions will be displayed in a Chrome window so we can see them.
-browser = Browser('chrome', **executable_path, headless=False)
-
-# create variable for what is returned from mars_news() function. 
-news_title, news_paragraph = mars_news(browser)
+import datetime as dt
 
 # create a function that will initialize the browser, create a data dictionary, end the WebDriver, return the scraped data
 def scrape_all():
@@ -22,6 +13,9 @@ def scrape_all():
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless = True) 
     # When scraping, the "headless" browsing session is when a browser is run without the users seeing it at all.
+
+    # create variable for what is returned from mars_news() function. 
+    news_title, news_paragraph = mars_news(browser)
 
     # set news title and paragraph variables, this code tells Python that we'll be using our mars_news function to pull this data.
     news_title, news_paragraph = mars_news(browser)

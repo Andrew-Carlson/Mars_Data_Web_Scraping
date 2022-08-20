@@ -43,7 +43,7 @@ def scrape():
 
     # Now that we've gathered new data, we need to update the database using .update_one()
     # syntax: .update_one(query_parameter, {"$set": data}, options)
-    mars.update_one({}, {"$set": data}, upsert = True)
+    mars.update_one({}, {"$set": mars_data}, upsert = True)
     # In the query_parameter, we can specify a field (e.g. {"news_title": "Mars Landing Successful"}), 
     # and MongoDB will update a document with a matching news_title. 
     # Or it can be left empty ({}) to update the first matching document in the collection.
@@ -58,7 +58,7 @@ def scrape():
 
     # tell flask to run
 
-if __name == "__main__":
+if __name__ == "__main__":
 
     app.run()
         
