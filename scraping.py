@@ -14,9 +14,6 @@ def scrape_all():
     browser = Browser('chrome', **executable_path, headless = True) 
     # When scraping, the "headless" browsing session is when a browser is run without the users seeing it at all.
 
-    # create variable for what is returned from mars_news() function. 
-    news_title, news_paragraph = mars_news(browser)
-
     # set news title and paragraph variables, this code tells Python that we'll be using our mars_news function to pull this data.
     news_title, news_paragraph = mars_news(browser)
     
@@ -82,7 +79,7 @@ def mars_news(browser): # browser is our global variable that we will use for ou
 
         # always include return function so python knows that function is completed
 
-    except AttributeError: # note that if BaseException is put in place off AttributeError it will cover any error type0
+    except AttributeError: # note that if BaseException is put in place off AttributeError it will cover any error type
 
         return None, None
     
