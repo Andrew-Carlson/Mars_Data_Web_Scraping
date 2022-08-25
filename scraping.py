@@ -23,6 +23,7 @@ def scrape_all():
         "news_paragraph" :news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(browser),
+        "hemisphere_images_titles": hemispheres(browser),
         "last_modified": dt.datetime.now()
     }
 
@@ -142,6 +143,59 @@ def mars_facts(browser):
 
     return df.to_html()
 
+def hemispheres(browser):
+    # add try-except block:
+    try: 
+        # Use Browser to visit URL
+        url = 'https://marshemispheres.com/'
+
+        browser.visit(url)
+
+        # create a list to store all Mars hemisphere image urls ant titles.
+        hemisphere_image_urls = []
+
+        # Write code to retrieve the image urls and titles for each hemisphere.
+        # Documentation: https://splinter.readthedocs.io/en/latest/elements-in-the-page.html
+        image_links =  browser.find_by_css('a.product-item img')
+        image_links
+
+        # get the count of image links on the webpage. This can therefore be iterated in a for loop
+        len(image_links)
+
+        # create for loop to access all images
+        for i in range(len(image_links)): # i will iterate over the items 0,1,2,and 3
+            
+            # create an empty dictionary to store image and title for each hemisphere
+            hemispheres = {}
+            
+            # use find_by_css function and the click method to click the image on the webpage to get to the next link
+            browser.find_by_css('a.product-item img')[i].click()
+            
+            # find sample image and extract 
+            sample_elem = browser.find_by_text('Sample').first
+            
+            # Add to dictionary: the key img_url will have the value of the image URL which is sample_elem['href']
+            hemispheres['img_url'] = sample_elem['href']
+            
+            # Add to dictionary: they key is the title and the key is the 
+            hemispheres["title"] = browser.find_by_css('h2.title').text
+            
+            # append each dictionary made for each image url and title to the hemisphere_image_urls list made.
+            hemisphere_image_urls.append(hemispheres)
+            
+            # we need to navigate to the start page so that the following error does not occur;
+            # ElementDoesNotExist: no elements could be found with css "a.product-item img"
+            
+            # use browser.back() to navigate back to start page
+            browser.back()
+
+    except AttributeError:
+        return None
+
+    # return the list that holds the dictionary of each image url and title.
+    return hemisphere_image_urls
+
+
 if __name__ == "__main__":
 
     # If running as script, print scraped data
@@ -153,4 +207,3 @@ if __name__ == "__main__":
 # For example, an image may suddenly become embedded within an inaccessible block of code because the developers 
 # switched to a new JavaScript library. 
 # It's not uncommon to revise code to find workarounds or even look for a different, scraping-friendly site all together.
-
