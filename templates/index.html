@@ -61,15 +61,17 @@
 
     <!--Create for loop to add all four images and captions(titles)-->
     {% for hemisphere in mars.hemisphere_images_titles %}
-    <div class="col-md-6">
-      <div class="thumbnail">
-        <img src="{{hemisphere.img_url}}" alt="...">
-        <div class="caption text-center">
-          <h3>{{hemisphere.title}}</h3>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <img src="{{hemisphere.img_url}}" alt="...">
+          <div class="caption text-center">
+            <h3>{{hemisphere.title}}</h3>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </body>
 </html>
